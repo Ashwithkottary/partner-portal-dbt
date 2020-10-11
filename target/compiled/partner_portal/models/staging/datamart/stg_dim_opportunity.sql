@@ -14,7 +14,9 @@ remaned_src as (
         finished_date,
         first_appointment_date,
         partner_service_premium,
-        days_to_first_appointment
+        days_to_first_appointment,
+        stage_name,
+        created_date
 
     from src
 

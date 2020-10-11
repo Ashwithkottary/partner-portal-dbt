@@ -1,0 +1,70 @@
+version: 2
+
+#this is the file where you are describing the raw data
+#in 'name' add: schema name
+# in database add the database where the schema resides
+sources:
+  - name: stg_finance 
+    description: the stg_finance layer as source for partner portal
+    database: partner_portal
+    
+    tables:
+      - name: navision_sp_fitting_header
+        description: ashwith to add details
+        columns:
+          - name: country_code_iso3
+            tests:
+              - accepted_values:
+                  values: ['CAN','CHE','CHN','DEU','FRA','GBR','HKG','IND','JPN','KOR','MYS','N/A','NLD','SGP','THA','USA',ZAF']
+                  severity: warn
+          - name: salesforce_id  
+            tests:
+              - unique:
+                  severity: warn
+              - not_null:
+                  severity: warn
+          - name: no_
+
+      - name: navision_sp_fitting_line
+        description: to be added
+        columns:
+          - name: fitting_process_no_
+          - name: no_
+          - name: country_code_iso3
+      - name: navision_item
+        description: to be added
+        columns:
+          - name: no_
+          - name: country_code_iso3
+          - name: item_category_code
+          - name: manufacturer_code
+      - name: navision_manufacturer
+        description: to be added
+        columns:
+          - name: code
+          - name: country_code_iso3
+          - name: name      
+
+
+#other options you can use at table and col level
+#      - name: dim_opportunity
+#        description: opportunity dimension table from data warehouse
+#        loaded_at_field: _etl_loaded_at
+#
+#        freshness:
+#          warn_after: {count: 12, period: hour}
+#          error_after: {count: 24, period: hour}
+
+#          - name: status
+#            description: "{{ doc('order_status') }}". ###description at col level
+#            tests:
+#              - accepted_values:
+#                  values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+#                  severity: warn
+#          - name: user_id
+#            description: Foreign key to.   ###description at col level
+#            tests:
+#              - not_null
+#              - relationships:
+#                  to: source('jaffle_shop', 'customers')
+#                  field: id

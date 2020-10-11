@@ -1,0 +1,18 @@
+version: 2
+
+#you define the sources here, sources are then referred in the models (and in models yml files). best practive to only use ref or source in models
+#this is the file where you are describing the raw data
+#in 'name' add: schema name
+# in database add the database where the schema resides
+
+sources:
+  - name: ext_sales 
+    description: the ext_sales layer as source for partner portal
+    database: partner_portal
+    
+    tables:
+      - name: salesforce_account
+      - name: salesforce_lead
+      - name: salesforce_opportunity
+      - name: salesforce_quote
+      - name: salesforce_task
