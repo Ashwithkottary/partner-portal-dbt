@@ -1,0 +1,40 @@
+#staging yml tables do not need descriptions, indeed this file may not be needed as well
+version: 2
+
+models:
+  - name: stg_dim_partner_subsidiary
+    columns:
+      - name: id
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+      - name: parent_id 
+
+  - name: stg_dim_opportunity
+    columns:
+      - name: id
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+
+      - name: partner_id
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+
+      - name: country_code_iso3
+        tests:
+          - accepted_values:
+                  values: ['CAN','CHE','CHN','DEU','FRA','GBR','HKG','IND','JPN','KOR','MYS','N/A','NLD','SGP','THA','USA',ZAF']
+                  severity: warn
+
+      - name: finished_date
+      - name: first_appointment_date
+      - name: partner_service_premium
+      - name: days_to_first_appointment
